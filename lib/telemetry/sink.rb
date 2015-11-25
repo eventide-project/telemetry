@@ -16,7 +16,7 @@ class Telemetry
           record name, time, data
         end
 
-        subset_method_name = "recorded_#{name}s"
+        subset_method_name = "#{name}_records"
         send(:define_method, subset_method_name) do |&blk|
           records.select { |r| r.name == name }
         end
