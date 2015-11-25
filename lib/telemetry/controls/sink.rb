@@ -19,6 +19,20 @@ class Telemetry
         def self.example
           Example.new
         end
+
+        module RecordAny
+          class Example
+            include Telemetry::Sink
+
+            record_any
+
+            record :something
+          end
+
+          def self.example
+            Example.new
+          end
+        end
       end
     end
   end

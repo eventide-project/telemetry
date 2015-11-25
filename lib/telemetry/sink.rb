@@ -1,7 +1,12 @@
 class Telemetry
   module Sink
+    def record_any?
+      false
+    end
+
     def self.included(cls)
       cls.extend RecordMacro
+      cls.extend RecordAnyMacro
     end
 
     module RecordMacro
@@ -25,6 +30,15 @@ class Telemetry
       alias :record :record_macro
     end
 
+    module RecordAnyMacro
+      def record_any_macro
+        send(:define_method, :record_any?) do
+          true
+        end
+      end
+      alias :record_any :record_any_macro
+    end
+
     Record = Struct.new :name, :time, :data
 
     def records
@@ -32,16 +46,34 @@ class Telemetry
     end
 
     def records?(name)
-      resond_to? "record_#{name}"
+      respond_to? "record_#{name}"
+    end
+
+    def record?(name)
+      record = false
+      if record_any?
+        record = true
+      else
+        if records? name
+          record = true
+        end
+      end
+      record
     end
 
     def recorded?(&blk)
       records.any? &blk
     end
 
-    def record(name, time, data=nil)
-      record = Record.new name, time, data
-      records << record
+    def record(name, time, data=nil, force: nil)
+      force ||= false
+
+      record = nil
+      if force || record?(name)
+        record = Record.new name, time, data
+        records << record
+      end
+      record
     end
   end
 end
