@@ -8,6 +8,18 @@ class Telemetry
       def self.example
         Example.new
       end
+
+      module Macro
+        class Example
+          include Telemetry::Sink
+
+          record :something
+        end
+
+        def self.example
+          Example.new
+        end
+      end
     end
   end
 end
