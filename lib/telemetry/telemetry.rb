@@ -21,7 +21,7 @@ class Telemetry
     sinks << sink
   end
 
-  def publish(name, data=nil)
+  def record(name, data=nil)
     sinks.each do |s|
       s.record name, clock.iso8601, data
     end

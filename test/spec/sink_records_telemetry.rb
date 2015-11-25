@@ -6,7 +6,7 @@ describe "Sink Records Telemetry" do
 
   telemetry.register sink
 
-  telemetry.publish :something, 'some data'
+  telemetry.record :something, 'some data'
 
   specify do
     sink.recorded? { |r| r.name == :something }
