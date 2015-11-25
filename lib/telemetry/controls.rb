@@ -1,0 +1,1 @@
+require 'telemetry/controls/sink'
