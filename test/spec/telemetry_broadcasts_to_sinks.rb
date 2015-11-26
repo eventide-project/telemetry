@@ -1,18 +1,18 @@
 require_relative 'spec_init'
 
-describe "Detect Recorded Telemetry" do
+describe "Telemetry Broadcasts" do
   telemetry = Telemetry.new
-  sink = Telemetry::Controls::Sink.example
 
-  telemetry.register sink
+  sink_1 = Telemetry::Controls::Sink::Macro.example
+  sink_2 = Telemetry::Controls::Sink::Macro.example
 
-  telemetry.record :something, 'some data'
+  telemetry.register sink_1
+  telemetry.register sink_2
 
-  specify "With predicate" do
-    assert(sink.recorded? { |r| r.name == :something })
-  end
+  telemetry.record :something
 
-  specify "Without predicate" do
-    assert(sink.recorded?)
+  specify "To all its sinks" do
+    assert(sink_1.recorded_something?)
+    assert(sink_2.recorded_something?)
   end
 end
