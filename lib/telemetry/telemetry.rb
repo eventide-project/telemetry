@@ -21,9 +21,9 @@ class Telemetry
     sinks << sink
   end
 
-  def record(name, data=nil)
+  def record(signal, data=nil)
     sinks.each do |s|
-      s.record name, clock.iso8601, data
+      s.record signal, clock.iso8601, data
     end
   end
 end

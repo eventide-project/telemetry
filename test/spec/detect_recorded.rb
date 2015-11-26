@@ -6,7 +6,7 @@ describe "Detect Recorded Telemetry" do
   sink.record :something, Time.now, 'some data'
 
   specify "With predicate" do
-    assert(sink.recorded? { |r| r.name == :something })
+    assert(sink.recorded? { |r| r.signal == :something })
   end
 
   specify "Without predicate" do

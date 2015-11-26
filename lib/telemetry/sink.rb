@@ -10,18 +10,18 @@ class Telemetry
     end
 
     module RecordMacro
-      def record_macro(name)
-        record_method_name = "record_#{name}"
+      def record_macro(signal)
+        record_method_name = "record_#{signal}"
         send(:define_method, record_method_name) do |time, data|
-          record name, time, data
+          record signal, time, data
         end
 
-        subset_method_name = "#{name}_records"
+        subset_method_name = "#{signal}_records"
         send(:define_method, subset_method_name) do |&blk|
-          records.select { |r| r.name == name }
+          records.select { |r| r.signal == signal }
         end
 
-        detect_method_name = "recorded_#{name}?"
+        detect_method_name = "recorded_#{signal}?"
         send(:define_method, detect_method_name) do |&blk|
           subset = send(subset_method_name)
 
@@ -44,22 +44,22 @@ class Telemetry
       alias :record_any :record_any_macro
     end
 
-    Record = Struct.new :name, :time, :data
+    Record = Struct.new :signal, :time, :data
 
     def records
       @records ||= []
     end
 
-    def records?(name)
-      respond_to? "record_#{name}"
+    def records?(signal)
+      respond_to? "record_#{signal}"
     end
 
-    def record?(name)
+    def record?(signal)
       record = false
       if record_any?
         record = true
       else
-        if records? name
+        if records? signal
           record = true
         end
       end
@@ -74,12 +74,12 @@ class Telemetry
       end
     end
 
-    def record(name, time, data=nil, force: nil)
+    def record(signal, time, data=nil, force: nil)
       force ||= false
 
       record = nil
-      if force || record?(name)
-        record = Record.new name, time, data
+      if force || record?(signal)
+        record = Record.new signal, time, data
         records << record
       end
       record

@@ -22,7 +22,7 @@ describe "Record Specific Telemetry" do
     sink.record :something_else, time, 'some macro data'
 
     specify "Is not recorded" do
-      recorded = sink.recorded? { |r| r.name == :something_else }
+      recorded = sink.recorded? { |r| r.signal == :something_else }
       refute(recorded)
     end
   end

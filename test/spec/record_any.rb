@@ -8,7 +8,7 @@ describe "Record Any Telemetry" do
   sink.record :something_else, time
 
   specify do
-    recorded = sink.recorded_something? { |r| r.name == :something_else }
+    recorded = sink.recorded_something? { |r| r.signal == :something_else }
     refute(recorded)
   end
 end

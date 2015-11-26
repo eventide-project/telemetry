@@ -1,6 +1,6 @@
 require_relative 'spec_init'
 
-describe "Sink Lists Records for Specified Name" do
+describe "Sink Lists Records for Specified signal" do
   sink = Telemetry::Controls::Sink::Macro.example
 
   time = Controls::Time.example
