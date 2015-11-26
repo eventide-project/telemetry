@@ -1,9 +1,12 @@
 require_relative 'spec_init'
 
 describe "Detect Recorded Telemetry" do
+  telemetry = Telemetry.new
   sink = Telemetry::Controls::Sink.example
 
-  sink.record :something, Time.now, 'some data'
+  telemetry.register sink
+
+  telemetry.record :something, 'some data'
 
   specify "With predicate" do
     assert(sink.recorded? { |r| r.name == :something })
