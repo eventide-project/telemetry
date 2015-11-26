@@ -3,6 +3,8 @@ class Telemetry
     module Sink
       class Example
         include Telemetry::Sink
+
+        record_any
       end
 
       def self.example

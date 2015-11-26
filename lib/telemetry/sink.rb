@@ -67,7 +67,11 @@ class Telemetry
     end
 
     def recorded?(&blk)
-      records.any? &blk
+      if blk.nil?
+        return !records.empty?
+      else
+        return records.any? &blk
+      end
     end
 
     def record(name, time, data=nil, force: nil)

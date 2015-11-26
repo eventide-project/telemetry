@@ -1,14 +1,12 @@
 require_relative 'spec_init'
 
 describe "Sink Records Telemetry" do
-  telemetry = Telemetry.new
   sink = Telemetry::Controls::Sink.example
 
-  telemetry.register sink
-
-  telemetry.record :something, 'some data'
+  sink.record :something, Time.now, 'some data'
+  sink.record :something_else, Time.now, 'some other data'
 
   specify do
-    sink.recorded? { |r| r.name == :something }
+    assert(sink.records.length == 2)
   end
 end
