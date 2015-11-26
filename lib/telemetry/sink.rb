@@ -24,7 +24,12 @@ class Telemetry
         detect_method_name = "recorded_#{name}?"
         send(:define_method, detect_method_name) do |&blk|
           subset = send(subset_method_name)
-          subset.any? &blk
+
+          if blk.nil?
+            return !subset.empty?
+          else
+            return subset.any? &blk
+          end
         end
       end
       alias :record :record_macro
