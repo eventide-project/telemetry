@@ -19,8 +19,5 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'clock'
   s.add_runtime_dependency 'controls'
 
-  s.add_development_dependency 'minitest'
-  s.add_development_dependency 'minitest-spec-context'
-  s.add_development_dependency 'pry'
-  s.add_development_dependency 'runner'
+  s.add_development_dependency 'test_bench'
 end

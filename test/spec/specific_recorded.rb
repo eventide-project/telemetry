@@ -1,6 +1,6 @@
 require_relative 'spec_init'
 
-describe "Sink Lists Records for Specified signal" do
+context "Sink Lists Records for Specified signal" do
   sink = Telemetry::Controls::Sink::Macro.example
 
   time = Controls::Time.example
@@ -8,7 +8,7 @@ describe "Sink Lists Records for Specified signal" do
   sink.record :something, time
   sink.record :something_else, time
 
-  specify do
+  test do
     assert(sink.something_records.length == 1)
   end
 end

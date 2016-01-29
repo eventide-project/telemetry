@@ -6,8 +6,7 @@ puts RUBY_DESCRIPTION
 
 require_relative '../init.rb'
 
-require 'runner'
+require 'test_bench'; TestBench.activate
 require 'telemetry/controls'
 require 'ostruct'
 
-Telemetry::Logger::AdHoc.activate

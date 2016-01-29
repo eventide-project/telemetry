@@ -1,14 +1,14 @@
 require_relative 'spec_init'
 
-describe "Record Any Telemetry" do
+context "Record Any Telemetry" do
   sink = Telemetry::Controls::Sink::Macro::RecordAny.example
 
   time = Controls::Time.example
 
   sink.record :something_else, time
 
-  specify do
+  test do
     recorded = sink.recorded_something? { |r| r.signal == :something_else }
-    refute(recorded)
+    assert(!recorded)
   end
 end
