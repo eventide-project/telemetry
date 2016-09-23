@@ -1,9 +1,9 @@
-require_relative 'spec_init'
+require_relative './bench_init'
 
 context "Sink Lists Records for Specified signal" do
   sink = Telemetry::Controls::Sink::Macro.example
 
-  time = Controls::Time.example
+  time = Telemetry::Controls::Time.example
 
   sink.record :something, time
   sink.record :something_else, time

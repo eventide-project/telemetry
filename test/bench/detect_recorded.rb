@@ -1,4 +1,4 @@
-require_relative 'spec_init'
+require_relative './bench_init'
 
 context "Detect Recorded Telemetry" do
   sink = Telemetry::Controls::Sink.example

@@ -1,10 +1,10 @@
-require_relative 'spec_init'
+require_relative './bench_init'
 
 context "Record Specific Telemetry" do
   context "Declared Telemetry" do
     sink = Telemetry::Controls::Sink::Macro.example
 
-    time = Controls::Time.example
+    time = Telemetry::Controls::Time.example
 
     sink.record_something time, 'some macro data'
 
@@ -17,7 +17,7 @@ context "Record Specific Telemetry" do
   context "Undeclared Telemetry" do
     sink = Telemetry::Controls::Sink::Macro.example
 
-    time = Controls::Time.example
+    time = Telemetry::Controls::Time.example
 
     sink.record :something_else, time, 'some macro data'
 
