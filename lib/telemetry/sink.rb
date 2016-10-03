@@ -18,7 +18,13 @@ class Telemetry
 
         subset_method_name = "#{signal}_records"
         send(:define_method, subset_method_name) do |&blk|
-          records.select { |r| r.signal == signal }
+          subset = records.select { |r| r.signal == signal }
+
+          unless blk.nil?
+            subset = subset.select &blk
+          end
+
+          subset
         end
 
         detect_method_name = "recorded_#{signal}?"

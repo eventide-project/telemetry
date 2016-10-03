@@ -1,29 +1,26 @@
 require_relative 'spec_init'
 
-context "Record Specific Telemetry" do
-  context "Declared Telemetry" do
-    sink = Telemetry::Controls::Sink::Macro.example
+context "Sink Lists Records for Specified Signal" do
+  sink = Telemetry::Controls::Sink::Macro.example
 
-    time = Controls::Time.example
+  time = Controls::Time.example
 
-    sink.record_something time, 'some macro data'
+  sink.record :something, time
+  sink.record :something_else, time
 
-    test "Recorded" do
-      recorded = sink.recorded_something? { |r| r.data == 'some macro data' }
-      assert(recorded)
+  context "With predicate" do
+    test do
+      records = sink.something_records do |record|
+        record.time == time
+      end
+
+      assert(records.length == 1)
     end
   end
 
-  context "Undeclared Telemetry" do
-    sink = Telemetry::Controls::Sink::Macro.example
-
-    time = Controls::Time.example
-
-    sink.record :something_else, time, 'some macro data'
-
-    test "Is not recorded" do
-      recorded = sink.recorded? { |r| r.signal == :something_else }
-      assert(!recorded)
+  context "Without predicate" do
+    test do
+      assert(sink.something_records.length == 1)
     end
   end
 end

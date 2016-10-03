@@ -10,3 +10,4 @@ require 'test_bench'; TestBench.activate
 require 'telemetry/controls'
 require 'ostruct'
 
+require 'pp'
