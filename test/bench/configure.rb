@@ -1,4 +1,4 @@
-require_relative 'spec_init'
+require_relative './bench_init'
 
 context "Configure a Receiver with Telemetry" do
   receiver = OpenStruct.new
