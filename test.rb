@@ -1,1 +1,1 @@
-require_relative 'test/bench'
+load './test/automated.rb'
