@@ -1,4 +1,4 @@
-require_relative './automated_init'
+require_relative 'automated_init'
 
 context "Record Macro" do
   sink = Telemetry::Controls::Sink::Macro::RecordAny.example
