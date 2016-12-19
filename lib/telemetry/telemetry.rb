@@ -23,7 +23,7 @@ class Telemetry
 
   def record(signal, data=nil)
     sinks.each do |s|
-      s.record signal, clock.now(precision: 5), data
+      s.record signal, clock.iso8601(precision: 5), data
     end
   end
 end
