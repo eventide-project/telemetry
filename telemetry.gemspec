@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 Gem::Specification.new do |s|
   s.name = 'evt-telemetry'
-  s.version = '0.3.0.0'
+  s.version = '0.3.0.1'
   s.summary = 'In-process telemetry based on observers'
   s.description = ' '
 
@@ -18,5 +18,5 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'evt-dependency'
   s.add_runtime_dependency 'evt-clock'
 
-  s.add_development_dependency 'ntl-test_bench'
+  s.add_development_dependency 'test_bench'
 end
