@@ -37,6 +37,17 @@ class Telemetry
             return subset.any? &blk
           end
         end
+
+        detect_once_method_name = "recorded_#{signal}_once?"
+        send(:define_method, detect_once_method_name) do |&blk|
+          subset = send(subset_method_name)
+
+          if blk.nil?
+            return subset.count == 1
+          else
+            return subset.one? &blk
+          end
+        end
       end
       alias :record :record_macro
     end
@@ -77,6 +88,14 @@ class Telemetry
         return !records.empty?
       else
         return records.any? &blk
+      end
+    end
+
+    def recorded_once?(&blk)
+      if blk.nil?
+        return records.count == 1
+      else
+        return records.one? &blk
       end
     end
 
