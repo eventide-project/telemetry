@@ -37,6 +37,17 @@ class Telemetry
             return subset.any? &blk
           end
         end
+
+        detect_once_method_name = "recorded_#{signal}_once?"
+        send(:define_method, detect_once_method_name) do |&blk|
+          subset = send(subset_method_name)
+
+          if blk.nil?
+            return subset.count == 1
+          else
+            return subset.one? &blk
+          end
+        end
       end
       alias :record :record_macro
     end
@@ -51,6 +62,8 @@ class Telemetry
     end
 
     Record = Struct.new :signal, :time, :data
+
+    Error = Class.new(RuntimeError)
 
     def records
       @records ||= []
@@ -72,14 +85,6 @@ class Telemetry
       record
     end
 
-    def recorded?(&blk)
-      if blk.nil?
-        return !records.empty?
-      else
-        return records.any? &blk
-      end
-    end
-
     def record(signal, time, data=nil, force: nil)
       force ||= false
 
@@ -89,6 +94,39 @@ class Telemetry
         records << record
       end
       record
+    end
+
+    def recorded?(&blk)
+      if blk.nil?
+        return !records.empty?
+      else
+        return records.any? &blk
+      end
+    end
+
+    def recorded_once?(&blk)
+      if blk.nil?
+        return records.count == 1
+      else
+        return records.one? &blk
+      end
+    end
+
+    def one_record(&blk)
+      records = self.records
+
+      unless blk.nil?
+        records = records.select(&blk)
+      end
+
+      case records.count
+      when 0
+        return nil
+      when 1
+        return records[0]
+      else
+        raise Error, "More than one matching record was recorded"
+      end
     end
   end
 end
