@@ -63,6 +63,8 @@ class Telemetry
 
     Record = Struct.new :signal, :time, :data
 
+    Error = Class.new(RuntimeError)
+
     def records
       @records ||= []
     end
@@ -83,6 +85,17 @@ class Telemetry
       record
     end
 
+    def record(signal, time, data=nil, force: nil)
+      force ||= false
+
+      record = nil
+      if force || record?(signal)
+        record = Record.new signal, time, data
+        records << record
+      end
+      record
+    end
+
     def recorded?(&blk)
       if blk.nil?
         return !records.empty?
@@ -99,15 +112,21 @@ class Telemetry
       end
     end
 
-    def record(signal, time, data=nil, force: nil)
-      force ||= false
+    def one_record(&blk)
+      records = self.records
 
-      record = nil
-      if force || record?(signal)
-        record = Record.new signal, time, data
-        records << record
+      unless blk.nil?
+        records = records.select(&blk)
       end
-      record
+
+      case records.count
+      when 0
+        return nil
+      when 1
+        return records[0]
+      else
+        raise Error, "More than one matching record was recorded"
+      end
     end
   end
 end
