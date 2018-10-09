@@ -1,4 +1,6 @@
 class Telemetry
+  Dependency.activate(self)
+
   dependency :clock
 
   def self.build

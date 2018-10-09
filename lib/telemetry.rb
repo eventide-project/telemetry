@@ -1,5 +1,5 @@
 require 'clock'
-require 'dependency'; Dependency.activate
+require 'dependency'
 
 require 'telemetry/sink'
 require 'telemetry/telemetry'
