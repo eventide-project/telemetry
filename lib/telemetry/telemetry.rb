@@ -1,5 +1,5 @@
 class Telemetry
-  Dependency.activate(self)
+  include Dependency
 
   dependency :clock
 
