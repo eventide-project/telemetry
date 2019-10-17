@@ -45,7 +45,7 @@ context "One Recorded Telemetry Signal" do
 
     context "Multiple Records Match" do
       test "Raises error" do
-        assert_raises Telemetry::Sink::Error do
+        assert_raises(Telemetry::Sink::Error) do
           sink.one_record { |r| r.signal == :something }
         end
       end
@@ -55,7 +55,7 @@ context "One Recorded Telemetry Signal" do
       record = nil
 
       test "Does not raise error" do
-        refute_raises Telemetry::Sink::Error do
+        refute_raises(Telemetry::Sink::Error) do
           record = sink.one_record { |r| r.data == 'other data' }
         end
       end
