@@ -12,6 +12,8 @@ context "Dependency Module" do
   end
 
   test "Records Telemetry" do
-    obj.telemetry.record(:some_signal, 'some data')
+    refute_raises do
+      obj.telemetry.record(:some_signal, 'some data')
+    end
   end
 end
