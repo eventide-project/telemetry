@@ -21,7 +21,7 @@ class Telemetry
           subset = records.select { |r| r.signal == signal }
 
           unless blk.nil?
-            subset = subset.select &blk
+            subset = subset.select(&blk)
           end
 
           subset
@@ -34,7 +34,7 @@ class Telemetry
           if blk.nil?
             return !subset.empty?
           else
-            return subset.any? &blk
+            return subset.any?(&blk)
           end
         end
 
@@ -45,7 +45,7 @@ class Telemetry
           if blk.nil?
             return subset.count == 1
           else
-            return subset.one? &blk
+            return subset.one?(&blk)
           end
         end
       end
@@ -100,7 +100,7 @@ class Telemetry
       if blk.nil?
         return !records.empty?
       else
-        return records.any? &blk
+        return records.any?(&blk)
       end
     end
 
@@ -108,7 +108,7 @@ class Telemetry
       if blk.nil?
         return records.count == 1
       else
-        return records.one? &blk
+        return records.one?(&blk)
       end
     end
 
