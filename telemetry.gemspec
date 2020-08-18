@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 Gem::Specification.new do |s|
   s.name = 'evt-telemetry'
-  s.version = '2.4.0.1'
+  s.version = '2.4.0.2'
   s.summary = 'In-process telemetry based on observers'
   s.description = ' '
 
