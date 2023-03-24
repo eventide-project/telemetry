@@ -131,4 +131,5 @@ end
 
 ## License
 
-The `telemetry` library is released under the [MIT License](https://github.com/telemetry/blob/master/MIT-License.txt).
+The `telemetry` library is released under the [MIT License](
+https://github.com/eventide-project/telemetry/blob/master/MIT-License.txt).
