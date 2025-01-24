@@ -15,6 +15,8 @@ Gem::Specification.new do |s|
   s.platform = Gem::Platform::RUBY
   s.required_ruby_version = '>= 2.3.3'
 
+  s.add_runtime_dependency 'ostruct'
+
   s.add_runtime_dependency 'evt-dependency'
   s.add_runtime_dependency 'evt-clock'
 
