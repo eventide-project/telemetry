@@ -1,1 +1,1 @@
-load './test/automated.rb'
+load "./test/automated.rb"

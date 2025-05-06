@@ -1,4 +1,4 @@
-require_relative 'automated_init'
+require_relative "automated_init"
 
 context "One Recorded Telemetry Signal" do
   context "Signal Is Not Recorded" do
@@ -20,7 +20,7 @@ context "One Recorded Telemetry Signal" do
   context "Signal Is Recorded Once" do
     sink = Telemetry::Controls::Sink.example
 
-    control_record = sink.record(:something, 'some_time', 'some data')
+    control_record = sink.record(:something, "some_time", "some data")
 
     assert(control_record.instance_of?(Telemetry::Sink::Record))
 
@@ -40,8 +40,8 @@ context "One Recorded Telemetry Signal" do
   context "Signal Is Recorded More Than Once" do
     sink = Telemetry::Controls::Sink.example
 
-    record_1 = sink.record(:something, 'some_time', 'some data')
-    record_2 = sink.record(:something, 'some_time', 'other data')
+    record_1 = sink.record(:something, "some_time", "some data")
+    record_2 = sink.record(:something, "some_time", "other data")
 
     context "Multiple Records Match" do
       test "Raises error" do
@@ -56,7 +56,7 @@ context "One Recorded Telemetry Signal" do
 
       test "Does not raise error" do
         refute_raises(Telemetry::Sink::Error) do
-          record = sink.one_record { |r| r.data == 'other data' }
+          record = sink.one_record { |r| r.data == "other data" }
         end
       end
 

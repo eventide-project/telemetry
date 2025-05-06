@@ -1,4 +1,4 @@
-require_relative 'automated_init'
+require_relative "automated_init"
 
 context "Record Specific Telemetry Once" do
   context "Signal Recorded Once" do
@@ -6,10 +6,10 @@ context "Record Specific Telemetry Once" do
 
     time = Telemetry::Controls::Time.example
 
-    sink.record_something time, 'some macro data'
+    sink.record_something time, "some macro data"
 
     test "Recorded once (with predicate)" do
-      recorded_once = sink.recorded_something_once? { |r| r.data == 'some macro data' }
+      recorded_once = sink.recorded_something_once? { |r| r.data == "some macro data" }
       assert(recorded_once)
     end
 
@@ -25,11 +25,11 @@ context "Record Specific Telemetry Once" do
     time = Telemetry::Controls::Time.example
 
     2.times do
-      sink.record_something time, 'some macro data'
+      sink.record_something time, "some macro data"
     end
 
     test "Not recorded once (with predicate)" do
-      recorded_once = sink.recorded_something_once? { |r| r.data == 'some macro data' }
+      recorded_once = sink.recorded_something_once? { |r| r.data == "some macro data" }
       refute(recorded_once)
     end
 

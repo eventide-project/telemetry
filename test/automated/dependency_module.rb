@@ -1,4 +1,4 @@
-require_relative 'automated_init'
+require_relative "automated_init"
 
 context "Dependency Module" do
   Example = Class.new do
@@ -13,7 +13,7 @@ context "Dependency Module" do
 
   test "Records Telemetry" do
     refute_raises do
-      obj.telemetry.record(:some_signal, 'some data')
+      obj.telemetry.record(:some_signal, "some data")
     end
   end
 end
